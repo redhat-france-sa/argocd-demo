@@ -17,7 +17,7 @@ spec:
     spec:
       serviceAccount: pacman
       containers:
-      - image: quay.io/xymox/pacman-app:0.1.1
+      - image: quay.io/xymox/pacman-app:ibm
         imagePullPolicy: Always
         name: pacman
         ports:
