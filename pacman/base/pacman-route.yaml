@@ -1,0 +1,39 @@
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: pacman-int
+  namespace: pacman
+  annotations:
+    argocd.argoproj.io/sync-options: Validate=false
+spec:
+  port:
+    targetPort: 8080
+  to:
+    kind: Service
+    name: pacman
+    weight: 100
+status:
+  ingress:
+  - conditions:
+    - status: "True"
+      type: Admitted
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: pacman
+  namespace: pacman
+spec:
+  host: pacman.clustership.com
+  port:
+    targetPort: 8080
+  to:
+    kind: Service
+    name: pacman
+    weight: 100
+status:
+  ingress:
+  - conditions:
+    - status: "True"
+      type: Admitted
